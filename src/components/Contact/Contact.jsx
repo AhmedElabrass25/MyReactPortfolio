@@ -1,12 +1,15 @@
 import Lottie from "lottie-react";
 import message from "../../assets/animation/email.json";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import toast from "react-hot-toast";
 const Contact = () => {
   const form = useRef();
+  const [loading, setLoading] = useState(false);
   // >>>>>>>>>  Handle Submit (emailjs liberary)>>>>>>>>>>>
   function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true); // Start loading
     emailjs
       .sendForm(
         "service_6doyv2m",
@@ -16,10 +19,18 @@ const Contact = () => {
       )
       .then(
         () => {
-          console.log("SUCCESS!");
+          toast.success("The message is sent succesfully !", {
+            position: "bottom-center",
+            duration: "5000",
+          });
+          form.current.reset(); // Clear input fields
+          setLoading(false);
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          toast.error(error.text || "There is Error ", {
+            position: "bottom-center",
+          });
+          setLoading(false);
         }
       );
   }
@@ -65,7 +76,11 @@ const Contact = () => {
                 type="submit"
                 className="text-white bg-[var(--blue)] hover:bg-blue-500 focus:ring-4 focus:outline-none font-bold rounded-lg text-md w-full sm:w-auto px-5 py-2.5 text-center"
               >
-                Submit
+                {loading ? (
+                  <i className="fas fa-spinner fa-spin"></i>
+                ) : (
+                  "Submit"
+                )}
               </button>
             </form>
           </div>

@@ -5,7 +5,7 @@ const Footer = () => {
         <div className="row">
           <p className="capitalize text-[var(--subtitle)]">
             Designed By{" "}
-            <span className="text-[var(--blue)]">Ahmed Elabrass 🔥 </span>© 2025
+            <span className="text-[var(--blue)]">Ahmed Mohamed 🔥 </span>© 2025
           </p>
         </div>
       </div>
