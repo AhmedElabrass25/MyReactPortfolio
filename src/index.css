@@ -86,6 +86,12 @@ body {
   border: 2px solid #c9c9c960;
 }
 
+.mainSection .card .divImage img {
+  height: 250px;
+  object-fit: cover;
+  object-position: top;
+}
+
 .mainSection .card,
 .mainSection .card .divImage img {
   transition: all 0.2s ease;

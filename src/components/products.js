@@ -15,6 +15,8 @@ import templateImage from "../assets/images/templateos.png";
 import portfolioImage from "../assets/images/portfolioapp.png";
 import gameappImage from "../assets/images/gameapp.png";
 import onlinestoreImage from "../assets/images/onlinestore.png";
+import noteAppIMage from "../assets/images/noteapp.png";
+import linkedinImage from "../assets/images/linkedin.png";
 
 export const Projects = [
   {
@@ -152,5 +154,21 @@ export const Projects = [
     demo: "https://onlinestore-swart-phi.vercel.app",
     category: "html&css&js",
     image: onlinestoreImage,
+  },
+  {
+    id: 18,
+    name: "Note App",
+    desc: "The Note App is a modern and user-friendly web application that allows users to create, edit, delete, and manage notes efficiently. The app integrates with a RESTful API for data storage and retrieval while ensuring form validation using Formik & Yup.",
+    demo: "https://note-app-pied-one.vercel.app",
+    category: "nextjs",
+    image: noteAppIMage,
+  },
+  {
+    id: 19,
+    name: "Linkedin Clone",
+    desc: "The LinkedIn Clone is  fully responsive social networking platform designed to connect professionals. This web application replicates key LinkedIn features, enabling users to sign in securely with Google Authentication, create and share posts, engage with others, and build a personal or professional network.",
+    demo: "https://linkedin-clone-5db25.web.app",
+    category: "reactjs",
+    image: linkedinImage,
   },
 ];

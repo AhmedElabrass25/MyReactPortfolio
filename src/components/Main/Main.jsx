@@ -85,6 +85,22 @@ const Main = () => {
                   react
                 </button>
               </li>
+              <li className="me-2" role="presentation">
+                <button
+                  onClick={() => setActiveTab("tab5")}
+                  className={`inline-block px-2 py-4 border-2 rounded-lg capitalize text-[17px] tracking-[1px] text-[var(--subtitle)] font-bold mb-2 bg-[var(--bgHeader)] ${
+                    activeTab === "tab5"
+                      ? "border-[var(--blue)]"
+                      : "border-gray-500 "
+                  }`}
+                  type="button"
+                  role="tab"
+                  aria-controls="tab5"
+                  aria-selected={activeTab === "tab5"}
+                >
+                  nextJs
+                </button>
+              </li>
             </ul>
           </div>
           {/* <<<<<<<<<<<<<< The Content >>>>>>>>>> */}
@@ -268,6 +284,63 @@ const Main = () => {
                     Projects.map((project) => {
                       return (
                         project.category.includes("react") && (
+                          <motion.div
+                            layout
+                            initial={{ transform: "scale(0)" }}
+                            animate={{ transform: "scale(1)" }}
+                            transition={{
+                              damping: 8,
+                              type: "spring",
+                              stiffness: "50",
+                            }}
+                            key={project.id}
+                            className="card w-full sm:w-[48%] md:w-[32%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
+                          >
+                            {/* Image */}
+                            <div className="divImage mb-3">
+                              <img
+                                src={project.image}
+                                className="w-full"
+                                alt=""
+                              />
+                            </div>
+                            {/* name */}
+                            <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
+                              {project.name}
+                            </h1>
+                            {/* category */}
+                            <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
+                              {project.category}
+                            </h3>
+                            {/* desc */}
+                            <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
+                              {project.desc}
+                            </p>
+                            <Link
+                              to={`${project.demo}`}
+                              className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
+                              target="_blank"
+                            >
+                              <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
+                              <span className="text-[18px]">Live Demo</span>
+                            </Link>
+                          </motion.div>
+                        )
+                      );
+                    })}
+                </AnimatePresence>
+              </div>
+            )}
+            {activeTab === "tab5" && (
+              <div
+                className="flex items-center justify-between flex-wrap"
+                role="tabpanel"
+              >
+                <AnimatePresence>
+                  {Projects?.length > 0 &&
+                    Projects.map((project) => {
+                      return (
+                        project.category.includes("next") && (
                           <motion.div
                             layout
                             initial={{ transform: "scale(0)" }}
