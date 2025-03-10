@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import Contact from "./components/Contact/Contact";
 import Skills from "./components/Skills/Skills";
 import { Toaster } from "react-hot-toast";
+import Services from "./components/Services/Services";
 
 const App = () => {
   return (
@@ -17,6 +18,8 @@ const App = () => {
           <Hero />
           <div className="line"></div>
           <Skills />
+          <div className="line"></div>
+          <Services />
           <div className="line"></div>
           <Main />
           <div className="line"></div>

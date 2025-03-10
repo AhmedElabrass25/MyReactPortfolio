@@ -17,6 +17,9 @@ import gameappImage from "../assets/images/gameapp.png";
 import onlinestoreImage from "../assets/images/onlinestore.png";
 import noteAppIMage from "../assets/images/noteapp.png";
 import linkedinImage from "../assets/images/linkedin.png";
+import aroundTheWorld from "../assets/images/aroundTheWorld.png";
+import weatherApp from "../assets/images/WaetherApp.png";
+import newsApp from "../assets/images/newsAppImage.png";
 
 export const Projects = [
   {
@@ -170,5 +173,29 @@ export const Projects = [
     demo: "https://linkedin-clone-5db25.web.app",
     category: "reactjs",
     image: linkedinImage,
+  },
+  {
+    id: 20,
+    name: "Around The World",
+    desc: "Around the World is a website designed to provide users with detailed information about countries across the globe. It allows users to explore different nations, view their flags, capitals, populations, regions, languages, and currencies. The platform includes features like search, filtering by region, and detailed country pages. Additionally, it ensures offline accessibility by storing data in local storage. With a user-friendly interface and a dark/light theme toggle, it enhances the browsing experience for users worldwide",
+    demo: "https://arround-the-world.vercel.app",
+    category: "reactjs",
+    image: aroundTheWorld,
+  },
+  {
+    id: 21,
+    name: "Weather App",
+    desc: "WeatherApp is a user-friendly application that provides real-time weather updates for cities around the world. It features current temperature, humidity, wind speed, and a 7-day forecast with dynamic icons and background changes based on weather conditions. The app is built with modern frontend technologies, ensuring a responsive and smooth user experience. It also integrates geolocation to fetch local weather automatically.",
+    demo: "https://react-weather-app-sage-seven.vercel.app",
+    category: "reactjs",
+    image: weatherApp,
+  },
+  {
+    id: 22,
+    name: "News App",
+    desc: "Itis a modern and user-friendly news app that keeps you updated with the latest headlines from around the world. Whether you're interested in politics, technology, sports, entertainment, or business, our app delivers real-time news tailored to your interests.",
+    demo: "https://react-news-app-steel.vercel.app",
+    category: "reactjs",
+    image: newsApp,
   },
 ];

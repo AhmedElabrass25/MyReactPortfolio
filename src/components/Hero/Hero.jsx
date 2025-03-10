@@ -41,9 +41,19 @@ const Hero = () => {
               <Link to="https://github.com/AhmedElabrass25" target="_blank">
                 <i className="fa-brands fa-github text-[25px] text-[var(--icon-hover)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>{" "}
               </Link>
-              <i className="fa-brands fa-twitter text-[25px] text-[var(--subtitle)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>
-              <i className="fa-brands fa-facebook text-[25px] text-[var(--subtitle)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>{" "}
-              <i className="fa-brands fa-linkedin text-[25px] text-[var(--subtitle)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>
+              <a
+                rel="noopener noreferrer"
+                href="https://wa.me/201208448553"
+                target="_blank"
+              >
+                <i className="fa-brands fa-whatsapp text-[25px] text-[var(--subtitle)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>
+              </a>
+              <Link>
+                <i className="fa-brands fa-facebook text-[25px] text-[var(--subtitle)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>{" "}
+              </Link>
+              <Link>
+                <i className="fa-brands fa-linkedin text-[25px] text-[var(--subtitle)] hover:text-[var(--icon-hover)] transition-all duration-300"></i>
+              </Link>
             </div>
           </div>
           {/* <<<<<<<<< 

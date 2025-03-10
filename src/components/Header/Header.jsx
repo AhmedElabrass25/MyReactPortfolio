@@ -5,7 +5,6 @@ import { ImProfile } from "react-icons/im";
 const Header = () => {
   const location = useLocation();
   const currentHash = location.hash;
-  console.log(currentHash);
   const isActive = (hash) => currentHash === hash;
   // <<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>
   const [isOpened, setIsOpened] = useState(false);
