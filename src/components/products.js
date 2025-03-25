@@ -20,6 +20,7 @@ import linkedinImage from "../assets/images/linkedin.png";
 import aroundTheWorld from "../assets/images/aroundTheWorld.png";
 import weatherApp from "../assets/images/WaetherApp.png";
 import newsApp from "../assets/images/newsAppImage.png";
+import KanbanApp from "../assets/images/kanbanApp.png";
 
 export const Projects = [
   {
@@ -197,5 +198,13 @@ export const Projects = [
     demo: "https://react-news-app-steel.vercel.app",
     category: "reactjs",
     image: newsApp,
+  },
+  {
+    id: 23,
+    name: "Kanban App",
+    desc: "A Kanban App is a project management tool that helps teams visualize workflows, track progress, and manage tasks efficiently. It is based on the Kanban methodology, which organizes tasks into stages such as To Do, In Progress, and Done.",
+    demo: "https://kanban-app-six-sepia.vercel.app",
+    category: "reactjs",
+    image: KanbanApp,
   },
 ];
