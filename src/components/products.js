@@ -21,6 +21,8 @@ import aroundTheWorld from "../assets/images/aroundTheWorld.png";
 import weatherApp from "../assets/images/WaetherApp.png";
 import newsApp from "../assets/images/newsAppImage.png";
 import KanbanApp from "../assets/images/kanbanApp.png";
+import dashboardApp from "../assets/images/dashboardApp.png";
+import socialApp from "../assets/images/socialApp.png";
 
 export const Projects = [
   {
@@ -206,5 +208,21 @@ export const Projects = [
     demo: "https://kanban-app-six-sepia.vercel.app",
     category: "reactjs",
     image: KanbanApp,
+  },
+  {
+    id: 24,
+    name: "Dashboard App",
+    desc: "The Dashboard provides a centralized view for users to monitor and manage key aspects of their account or application. It displays real-time data, summaries, and analytics in an organized and visually appealing layout. Users can quickly access important actions, track performance metrics, and stay informed about recent activity or system updates — all from a single, user-friendly interface.",
+    demo: "https://dashboard-app-nextjs-drab.vercel.app",
+    category: "nextjs",
+    image: dashboardApp,
+  },
+  {
+    id: 25,
+    name: "Social App",
+    desc: "This Social App is a modern platform that allows users to connect, share, and interact in real-time. Users can create profiles, post updates, follow others, like and comment on content, and engage in meaningful conversations. Designed with a clean UI and smooth UX, it offers an experience similar to popular social networks, with added focus on performance, responsiveness, and a touch of personalization. Whether you're building your network or sharing your thoughts, this app is your space to stay connected.",
+    demo: "https://social-app-two-murex.vercel.app",
+    category: "nextjs",
+    image: socialApp,
   },
 ];
