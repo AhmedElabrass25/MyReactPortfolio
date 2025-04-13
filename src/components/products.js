@@ -23,6 +23,7 @@ import newsApp from "../assets/images/newsAppImage.png";
 import KanbanApp from "../assets/images/kanbanApp.png";
 import dashboardApp from "../assets/images/dashboardApp.png";
 import socialApp from "../assets/images/socialApp.png";
+import amazonApp from "../assets/images/amazonPicture.png";
 
 export const Projects = [
   {
@@ -224,5 +225,13 @@ export const Projects = [
     demo: "https://social-app-two-murex.vercel.app",
     category: "nextjs",
     image: socialApp,
+  },
+  {
+    id: 26,
+    name: "Amazon App",
+    desc: "Amazon App Clone , A fully responsive e - commerce application inspired by Amazon, built using modern frontend technologies.Features include product listing, dynamic product details pages, shopping cart functionality, user authentication, and order management.Implemented real - time data handling and state management using Redux Toolkit, and ensured optimal UX across devices..",
+    demo: "https://nextjs-amazon-iota.vercel.app",
+    category: "nextjs",
+    image: amazonApp,
   },
 ];
