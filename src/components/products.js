@@ -24,6 +24,8 @@ import KanbanApp from "../assets/images/kanbanApp.png";
 import dashboardApp from "../assets/images/dashboardApp.png";
 import socialApp from "../assets/images/socialApp.png";
 import amazonApp from "../assets/images/amazonPicture.png";
+import twitterApp from "../assets/images/twitterImage.png";
+import advancedTodo from "../assets/images/todoImage.png";
 
 export const Projects = [
   {
@@ -233,5 +235,21 @@ export const Projects = [
     demo: "https://nextjs-amazon-iota.vercel.app",
     category: "nextjs",
     image: amazonApp,
+  },
+  {
+    id: 27,
+    name: "Twitter Clone",
+    desc: "A full-featured Twitter Clone built with modern web technologies to replicate the core functionality and user experience of the popular social media platform. This project demonstrates real-world skills in frontend development, UI/UX design, and state management.",
+    demo: "https://twitter-app-jet.vercel.app",
+    category: "nextjs",
+    image: twitterApp,
+  },
+  {
+    id: 28,
+    name: "Advanced todo_app",
+    desc: "An advanced and responsive Todo Application built with modern tools like Redux Toolkit and Framer Motion, designed to provide a smooth, organized, and interactive task management experience.",
+    demo: "https://advanced-todo-opal.vercel.app",
+    category: "nextjs",
+    image: advancedTodo,
   },
 ];
