@@ -1,395 +1,141 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Projects } from "../products";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
+const TABS = [
+  { id: "tab1", label: "all projects", filter: () => true },
+  { id: "tab2", label: "html & css", filter: (p) => p.category === "html&css" },
+  {
+    id: "tab3",
+    label: "JavaScript",
+    filter: (p) => p.category === "html&css&js",
+  },
+  { id: "tab4", label: "react", filter: (p) => p.category.includes("react") },
+  { id: "tab5", label: "nextJs", filter: (p) => p.category.includes("next") },
+];
+
+const ITEMS_PER_PAGE = 6;
+
 const Main = () => {
-  // State to track the active tab
   const [activeTab, setActiveTab] = useState("tab1");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const activeFilter =
+    TABS.find((tab) => tab.id === activeTab)?.filter || (() => true);
+  const filteredProjects = Projects.filter(activeFilter);
+
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentProjects = filteredProjects.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+  // Reset to first page when tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
+
+  const renderProjectCard = (project) => (
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      key={project.id}
+      className="card w-full sm:w-[46%] md:w-[30%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
+    >
+      <div className="divImage h-[250px] mb-3">
+        <img src={project.image} className="w-full h-full" alt="" />
+      </div>
+      <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
+        {project.name}
+      </h1>
+      <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
+        {project.category}
+      </h3>
+      <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
+        {project.desc}
+      </p>
+      <Link
+        to={project.demo}
+        className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
+        target="_blank"
+      >
+        <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
+        <span className="text-[18px]">Live Demo</span>
+      </Link>
+    </motion.div>
+  );
 
   return (
     <section className="mainSection my-14" id="main">
-      {/*<<<<<<<<<<<<<<<< Title >>>>>>>>>>>>>> */}
       <h1 className="text-3xl font-bold capitalize w-full text-center mb-12">
         my portfolio
       </h1>
       <div className="container">
-        <div>
-          {/* <<<<<<<<<<<<<< The Links >>>>>>>>>> */}
-          <div className="mb-6 dark:border-gray-700">
-            <ul
-              className="w-full flex flex-wrap items-center justify-center gap-6 -mb-px text-sm font-medium text-center"
-              role="tablist"
-            >
-              <li className="me-2" role="presentation">
+        {/* Tabs */}
+        <div className="mb-6 dark:border-gray-700">
+          <ul
+            className="w-full flex flex-wrap items-center justify-center gap-6 -mb-px text-sm font-medium text-center"
+            role="tablist"
+          >
+            {TABS.map((tab) => (
+              <li key={tab.id} role="presentation">
                 <button
-                  onClick={() => setActiveTab("tab1")}
+                  onClick={() => setActiveTab(tab.id)}
                   className={`inline-block px-2 py-4 border-2 rounded-lg capitalize text-[17px] tracking-[1px] text-[var(--subtitle)] font-bold mb-2 bg-[var(--bgHeader)] ${
-                    activeTab === "tab1"
+                    activeTab === tab.id
                       ? "border-[var(--blue)] bg-[var(--border)]"
                       : "border-gray-500"
                   }`}
                   type="button"
                   role="tab"
-                  aria-controls="tab1"
-                  aria-selected={activeTab === "tab1"}
+                  aria-controls={tab.id}
+                  aria-selected={activeTab === tab.id}
                 >
-                  all projects
+                  {tab.label}
                 </button>
               </li>
-              <li className="me-2" role="presentation">
-                <button
-                  onClick={() => setActiveTab("tab2")}
-                  className={`inline-block px-2 py-4 border-2 rounded-lg capitalize text-[17px] tracking-[1px] text-[var(--subtitle)] font-bold mb-2 bg-[var(--bgHeader)] ${
-                    activeTab === "tab2"
-                      ? "border-[var(--blue)] bg-[var(--border)]"
-                      : "border-gray-500"
-                  }`}
-                  type="button"
-                  role="tab"
-                  aria-controls="tab2"
-                  aria-selected={activeTab === "tab2"}
-                >
-                  html & css
-                </button>
-              </li>
-              <li className="me-2" role="presentation">
-                <button
-                  onClick={() => setActiveTab("tab3")}
-                  className={`inline-block px-2 py-4 border-2 rounded-lg capitalize text-[17px] tracking-[1px] text-[var(--subtitle)] font-bold mb-2 bg-[var(--bgHeader)] ${
-                    activeTab === "tab3"
-                      ? "border-[var(--blue)] bg-[var(--border)]"
-                      : "border-gray-500 "
-                  }`}
-                  type="button"
-                  role="tab"
-                  aria-controls="tab3"
-                  aria-selected={activeTab === "tab3"}
-                >
-                  JavaScript
-                </button>
-              </li>
-              <li className="me-2" role="presentation">
-                <button
-                  onClick={() => setActiveTab("tab4")}
-                  className={`inline-block px-2 py-4 border-2 rounded-lg capitalize text-[17px] tracking-[1px] text-[var(--subtitle)] font-bold mb-2 bg-[var(--bgHeader)] ${
-                    activeTab === "tab4"
-                      ? "border-[var(--blue)]"
-                      : "border-gray-500 "
-                  }`}
-                  type="button"
-                  role="tab"
-                  aria-controls="tab4"
-                  aria-selected={activeTab === "tab4"}
-                >
-                  react
-                </button>
-              </li>
-              <li className="me-2" role="presentation">
-                <button
-                  onClick={() => setActiveTab("tab5")}
-                  className={`inline-block px-2 py-4 border-2 rounded-lg capitalize text-[17px] tracking-[1px] text-[var(--subtitle)] font-bold mb-2 bg-[var(--bgHeader)] ${
-                    activeTab === "tab5"
-                      ? "border-[var(--blue)]"
-                      : "border-gray-500 "
-                  }`}
-                  type="button"
-                  role="tab"
-                  aria-controls="tab5"
-                  aria-selected={activeTab === "tab5"}
-                >
-                  nextJs
-                </button>
-              </li>
-            </ul>
-          </div>
-          {/* <<<<<<<<<<<<<< The Content >>>>>>>>>> */}
-          <div id="default-tab-content">
-            {activeTab === "tab1" && (
-              <div
-                className="flex items-center justify-between flex-wrap"
-                role="tabpanel"
-              >
-                <AnimatePresence>
-                  {Projects?.length > 0 &&
-                    Projects.map((project) => {
-                      return (
-                        <motion.div
-                          layout
-                          initial={{ transform: "scale(0)" }}
-                          animate={{ transform: "scale(1)" }}
-                          transition={{
-                            damping: 8,
-                            type: "spring",
-                            stiffness: "50",
-                          }}
-                          key={project.id}
-                          className="card w-full sm:w-[48%] md:w-[32%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
-                        >
-                          {/* Image */}
-                          <div className="divImage mb-3">
-                            <img
-                              src={project.image}
-                              className="w-full"
-                              alt=""
-                            />
-                          </div>
-                          {/* name */}
-                          <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
-                            {project.name}
-                          </h1>
-                          {/* category */}
-                          <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
-                            {project.category}
-                          </h3>
-                          {/* desc */}
-                          <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
-                            {project.desc}
-                          </p>
-                          <Link
-                            to={`${project.demo}`}
-                            className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
-                            target="_blank"
-                          >
-                            <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
-                            <span className="text-[18px]">Live Demo</span>
-                          </Link>
-                        </motion.div>
-                      );
-                    })}
-                </AnimatePresence>
-              </div>
-            )}
-            {activeTab === "tab2" && (
-              <div
-                className="flex items-center justify-between flex-wrap"
-                role="tabpanel"
-              >
-                <AnimatePresence>
-                  {Projects?.length > 0 &&
-                    Projects.map((project) => {
-                      return (
-                        project.category == "html&css" && (
-                          <motion.div
-                            layout
-                            initial={{ transform: "scale(0)" }}
-                            animate={{ transform: "scale(1)" }}
-                            transition={{
-                              damping: 8,
-                              type: "spring",
-                              stiffness: "50",
-                            }}
-                            key={project.id}
-                            className="card w-full sm:w-[48%] md:w-[32%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
-                          >
-                            {/* Image */}
-                            <div className="divImage mb-3">
-                              <img
-                                src={project.image}
-                                className="w-full"
-                                alt=""
-                              />
-                            </div>
-                            {/* name */}
-                            <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
-                              {project.name}
-                            </h1>
-                            {/* category */}
-                            <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
-                              {project.category}
-                            </h3>
-                            {/* desc */}
-                            <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
-                              {project.desc}
-                            </p>
-                            <Link
-                              to={`${project.demo}`}
-                              className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
-                              target="_blank"
-                            >
-                              <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
-                              <span className="text-[18px]">Live Demo</span>
-                            </Link>
-                          </motion.div>
-                        )
-                      );
-                    })}
-                </AnimatePresence>
-              </div>
-            )}
-            {activeTab === "tab3" && (
-              <div
-                className="flex items-center justify-between flex-wrap"
-                role="tabpanel"
-              >
-                <AnimatePresence>
-                  {Projects?.length > 0 &&
-                    Projects.map((project) => {
-                      return (
-                        project.category == "html&css&js" && (
-                          <motion.div
-                            layout
-                            initial={{ transform: "scale(0)" }}
-                            animate={{ transform: "scale(1)" }}
-                            transition={{
-                              damping: 8,
-                              type: "spring",
-                              stiffness: "50",
-                            }}
-                            key={project.id}
-                            className="card w-full sm:w-[48%] md:w-[32%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
-                          >
-                            {/* Image */}
-                            <div className="divImage mb-3">
-                              <img
-                                src={project.image}
-                                className="w-full"
-                                alt=""
-                              />
-                            </div>
-                            {/* name */}
-                            <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
-                              {project.name}
-                            </h1>
-                            {/* category */}
-                            <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
-                              {project.category}
-                            </h3>
-                            {/* desc */}
-                            <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
-                              {project.desc}
-                            </p>
-                            <Link
-                              to={`${project.demo}`}
-                              className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
-                              target="_blank"
-                            >
-                              <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
-                              <span className="text-[18px]">Live Demo</span>
-                            </Link>
-                          </motion.div>
-                        )
-                      );
-                    })}
-                </AnimatePresence>
-              </div>
-            )}
-            {activeTab === "tab4" && (
-              <div
-                className="flex items-center justify-between flex-wrap"
-                role="tabpanel"
-              >
-                <AnimatePresence>
-                  {Projects?.length > 0 &&
-                    Projects.map((project) => {
-                      return (
-                        project.category.includes("react") && (
-                          <motion.div
-                            layout
-                            initial={{ transform: "scale(0)" }}
-                            animate={{ transform: "scale(1)" }}
-                            transition={{
-                              damping: 8,
-                              type: "spring",
-                              stiffness: "50",
-                            }}
-                            key={project.id}
-                            className="card w-full sm:w-[48%] md:w-[32%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
-                          >
-                            {/* Image */}
-                            <div className="divImage mb-3">
-                              <img
-                                src={project.image}
-                                className="w-full"
-                                alt=""
-                              />
-                            </div>
-                            {/* name */}
-                            <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
-                              {project.name}
-                            </h1>
-                            {/* category */}
-                            <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
-                              {project.category}
-                            </h3>
-                            {/* desc */}
-                            <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
-                              {project.desc}
-                            </p>
-                            <Link
-                              to={`${project.demo}`}
-                              className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
-                              target="_blank"
-                            >
-                              <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
-                              <span className="text-[18px]">Live Demo</span>
-                            </Link>
-                          </motion.div>
-                        )
-                      );
-                    })}
-                </AnimatePresence>
-              </div>
-            )}
-            {activeTab === "tab5" && (
-              <div
-                className="flex items-center justify-between flex-wrap"
-                role="tabpanel"
-              >
-                <AnimatePresence>
-                  {Projects?.length > 0 &&
-                    Projects.map((project) => {
-                      return (
-                        project.category.includes("next") && (
-                          <motion.div
-                            layout
-                            initial={{ transform: "scale(0)" }}
-                            animate={{ transform: "scale(1)" }}
-                            transition={{
-                              damping: 8,
-                              type: "spring",
-                              stiffness: "50",
-                            }}
-                            key={project.id}
-                            className="card w-full sm:w-[48%] md:w-[32%] p-3 bg-[var(--bgHeader)] mb-3 rounded-md"
-                          >
-                            {/* Image */}
-                            <div className="divImage mb-3">
-                              <img
-                                src={project.image}
-                                className="w-full"
-                                alt=""
-                              />
-                            </div>
-                            {/* name */}
-                            <h1 className="text-lg lg:text-2xl font-bold text-[var(--title)] mb-1 w-full text-center">
-                              {project.name}
-                            </h1>
-                            {/* category */}
-                            <h3 className="text-lg text-[var(--blue)] mb-3 w-full text-center capitalize tracking-[1.5px]">
-                              {project.category}
-                            </h3>
-                            {/* desc */}
-                            <p className="text-[var(--subtitle)] text-[18px] line-clamp-3 mb-3">
-                              {project.desc}
-                            </p>
-                            <Link
-                              to={`${project.demo}`}
-                              className="flex items-center justify-center text-[var(--icon-hover)] hover:text-[var(--blue)] transition-all duration-300"
-                              target="_blank"
-                            >
-                              <i className="fa-solid fa-earth-europe text-[25px] me-1"></i>
-                              <span className="text-[18px]">Live Demo</span>
-                            </Link>
-                          </motion.div>
-                        )
-                      );
-                    })}
-                </AnimatePresence>
-              </div>
-            )}
-          </div>
+            ))}
+          </ul>
         </div>
+
+        {/* Project Cards */}
+        <div
+          className="flex items-center justify-between flex-wrap"
+          role="tabpanel"
+        >
+          <AnimatePresence>
+            {currentProjects.map(renderProjectCard)}
+          </AnimatePresence>
+        </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => {
+                  setCurrentPage(page);
+                  document
+                    .getElementById("main")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className={`w-10 h-10 text-sm rounded-full border font-semibold transition duration-300 ${
+                  currentPage === page
+                    ? "bg-[var(--blue)] text-white"
+                    : "bg-white text-[var(--blue)] border-[var(--blue)]"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
