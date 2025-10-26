@@ -2,31 +2,47 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { ImProfile } from "react-icons/im";
+import { FaSun, FaMoon, FaAngleUp } from "react-icons/fa"; // Using Fa icons for better styling
+
 const Header = () => {
   const location = useLocation();
-  const currentHash = location.hash;
+  // Ensure the hash starts with '#' for the root route
+  const currentHash = location.hash || "#";
   const isActive = (hash) => currentHash === hash;
-  // <<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>
+
+  // <<<<<<<<<<<<<<<<<< State Management >>>>>>>>>>>>>>>>>>>>>>
   const [isOpened, setIsOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [mode, setMode] = useState(
-    localStorage.getItem("currentMode") || "dark"
-  );
-  // <<<<<<<<changeMode Function>>>>>>>>>>>
+
+  // Use 'system' as initial mode to check user's preference or default to 'dark'
+  const [mode, setMode] = useState(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("currentMode")) {
+      return localStorage.getItem("currentMode");
+    }
+    // Default to dark mode if no local storage value is found
+    return "dark";
+  });
+
+  // <<<<<<<< changeMode Function >>>>>>>>>>>
   function changeMode() {
-    localStorage.setItem("currentMode", mode === "dark" ? "light" : "dark");
-    setMode(localStorage.getItem("currentMode"));
+    const newMode = mode === "dark" ? "light" : "dark";
+    localStorage.setItem("currentMode", newMode);
+    setMode(newMode);
   }
+
+  // Apply or remove 'dark' class on the body element
   useEffect(() => {
-    if (mode == "light") {
-      document.body.classList.remove("dark");
-      document.body.classList.add("light");
+    const body = document.body;
+    if (mode === "dark") {
+      body.classList.add("dark", "bg-gray-900");
+      body.classList.remove("light", "bg-gray-50");
     } else {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
+      body.classList.add("light", "bg-gray-50");
+      body.classList.remove("dark", "bg-gray-900");
     }
   }, [mode]);
-  // <<<<<<<<<<<<< Show button when page is scrolled down
+
+  // <<<<<<<<<<<<< Scroll Visibility Logic >>>>>>>>>>>>>
   const toggleVisibility = () => {
     if (window.scrollY > 300) {
       setIsVisible(true);
@@ -35,7 +51,7 @@ const Header = () => {
     }
   };
 
-  // <<<<<<<<<<<Scroll to top>>>>>>>
+  // <<<<<<<<<<< Scroll to top >>>>>>>
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -49,32 +65,69 @@ const Header = () => {
       window.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
+
+  // Base classes for navigation links
+  const linkBaseClasses =
+    "block py-2 px-4 text-lg font-medium rounded-full transition-colors duration-200 cursor-pointer";
+  const linkDefaultClasses =
+    "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400";
+  const linkActiveClasses =
+    "text-white bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600";
+
+  const getLinkClasses = (hash) => {
+    const active = isActive(hash);
+    return `${linkBaseClasses} ${
+      active ? linkActiveClasses : linkDefaultClasses
+    }`;
+  };
+
   return (
     <>
+      {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed z-50 h-12 w-12 bottom-6 right-6 p-2 flex items-center justify-center rounded-full shadow-md bg-[var(--blue)] text-white transition-all duration-300 hover:bg-blue-500 hover:scale-110 ${
-          isVisible ? "opacity-100" : "opacity-0"
+        aria-label="Scroll to top"
+        className={`fixed z-50 h-12 w-12 bottom-6 right-6 p-2 flex items-center justify-center rounded-full shadow-lg bg-blue-600 text-white transition-all duration-300 hover:bg-blue-700 hover:scale-110 ${
+          isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10 pointer-events-none"
         }`}
       >
-        <i className="fa-solid fa-angle-up text-lg"></i>
+        <FaAngleUp className="text-xl" />
       </button>
+
       {/* The Navbar */}
-      <nav className="the-navbar pt-5 mb-10 sticky top-0 z-10 pb-3 bg-[var(--secondary)]">
-        <div className="container flex flex-wrap items-center justify-between">
+      <nav className="the-navbar bg-[#f9fafb] dark:bg-[#111827] py-5 px-4 sticky top-0 z-50 shadow-md transition-colors duration-300">
+        <div className="container mx-auto flex flex-wrap items-center justify-between py-5">
           {/* <<<<<<< Logo >>>>>>> */}
           <HashLink to={"#"} className={`flex items-center justify-center`}>
-            <ImProfile className="text-[var(--title)] text-5xl" />
+            <ImProfile className="text-blue-600 dark:text-blue-400 text-4xl" />
+            <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-white">
+              Portfolio
+            </span>
           </HashLink>
-          <div className="flex items-center">
-            {/* bar Button declare in mobile design */}
+
+          <div className="flex items-center space-x-4">
+            {/* Mode Toggle Button (Visible on all screens) */}
+            <button
+              onClick={changeMode}
+              aria-label="Toggle dark/light mode"
+              className="w-10 h-10 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 shadow-md rounded-full flex items-center justify-center transition-all duration-500 hover:ring-2 hover:ring-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              {mode === "dark" ? (
+                <FaSun className="text-xl text-yellow-400" />
+              ) : (
+                <FaMoon className="text-xl text-gray-700" />
+              )}
+            </button>
+
+            {/* Bar Button (Mobile design) */}
             <button
               onClick={() => setIsOpened(!isOpened)}
-              data-collapse-toggle="navbar-language"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600"
               aria-controls="navbar-language"
-              aria-expanded="false"
+              aria-expanded={isOpened}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -94,107 +147,99 @@ const Header = () => {
               </svg>
             </button>
           </div>
-          {/* <<<<<<<<<<<< Links >>>>>>>>>>>>> */}
+
+          {/* <<<<<<<<<<<< Desktop Links >>>>>>>>>>>>> */}
           <div
-            className=" bg-[var(--bgHeader)] rounded-[30px] p-2 items-center justify-between hidden w-fit md:flex shadow-xl shadow-gray-800/50"
+            className="hidden w-auto md:flex p-1 bg-gray-100 dark:bg-gray-800 rounded-full shadow-lg"
             id="navbar-language"
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-              <HashLink
-                to="#"
-                className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                  isActive("#") ? "active" : ""
-                }`}
-                aria-current="page"
-              >
-                About
-              </HashLink>{" "}
-              <HashLink
-                to="/#skills"
-                className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                  isActive("#skills") ? "active" : ""
-                }`}
-                aria-current="page"
-              >
-                Skills
-              </HashLink>
-              <HashLink
-                to="/#main"
-                className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                  isActive("#main") ? "active" : ""
-                }`}
-                aria-current="page"
-              >
-                Projects
-              </HashLink>{" "}
-              <HashLink
-                to="/#contact"
-                className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                  isActive("#contact") ? "active" : ""
-                }`}
-                aria-current="page"
-              >
-                Contact
-              </HashLink>{" "}
-            </ul>
-          </div>
-          {/* <<<<<<<<<<< Mobile Links>>>>>>>>> */}
-          {isOpened && (
-            <div
-              className="items-center justify-center flex-col flex w-full md:hidden md:w-auto md:order-1"
-              id="navbar-language"
-            >
-              <ul className="flex flex-col font-medium p-4 md:p-0 mt-4  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-                <HashLink
-                  to="#"
-                  className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                    isActive("#") ? "active" : ""
-                  }`}
-                  aria-current="page"
-                >
+            <ul className="flex space-x-1">
+              <li>
+                <HashLink to="#" className={getLinkClasses("#")}>
                   About
-                </HashLink>{" "}
-                <HashLink
-                  to="/#skills"
-                  className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                    isActive("#skills") ? "active" : ""
-                  }`}
-                  aria-current="page"
-                >
+                </HashLink>
+              </li>
+              <li>
+                <HashLink to="/#skills" className={getLinkClasses("#skills")}>
                   Skills
                 </HashLink>
+              </li>
+              <li>
                 <HashLink
-                  to="/#main"
-                  className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                    isActive("#main") ? "active" : ""
-                  }`}
-                  aria-current="page"
+                  to="/#features"
+                  className={getLinkClasses("#features")}
                 >
+                  Features
+                </HashLink>
+              </li>
+              <li>
+                <HashLink to="/#main" className={getLinkClasses("#main")}>
                   Projects
-                </HashLink>{" "}
-                <HashLink
-                  to="/#contact"
-                  className={`block py-2 px-3 text-[var(--title)] font-semibold text-[18px] ${
-                    isActive("#contact") ? "active" : ""
-                  }`}
-                  aria-current="page"
-                >
+                </HashLink>
+              </li>
+              <li>
+                <HashLink to="/#contact" className={getLinkClasses("#contact")}>
                   Contact
-                </HashLink>{" "}
+                </HashLink>
+              </li>
+            </ul>
+          </div>
+
+          {/* <<<<<<<<<<< Mobile Links Dropdown >>>>>>>>>*/}
+          {isOpened && (
+            <div
+              className="absolute top-16 right-4 w-60 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl md:hidden transition-opacity duration-300 transform origin-top-right"
+              id="navbar-mobile"
+            >
+              <ul className="flex flex-col space-y-2">
+                <li>
+                  <HashLink
+                    onClick={() => setIsOpened(false)}
+                    to="#"
+                    className={getLinkClasses("#")}
+                  >
+                    About
+                  </HashLink>
+                </li>
+                <li>
+                  <HashLink
+                    onClick={() => setIsOpened(false)}
+                    to="/#skills"
+                    className={getLinkClasses("#skills")}
+                  >
+                    Skills
+                  </HashLink>
+                </li>
+                <li>
+                  <HashLink
+                    onClick={() => setIsOpened(false)}
+                    to="/#features"
+                    className={getLinkClasses("#features")}
+                  >
+                    Features
+                  </HashLink>
+                </li>
+                <li>
+                  <HashLink
+                    onClick={() => setIsOpened(false)}
+                    to="/#main"
+                    className={getLinkClasses("#main")}
+                  >
+                    Projects
+                  </HashLink>
+                </li>
+                <li>
+                  <HashLink
+                    onClick={() => setIsOpened(false)}
+                    to="/#contact"
+                    className={getLinkClasses("#contact")}
+                  >
+                    Contact
+                  </HashLink>
+                </li>
               </ul>
             </div>
           )}
-          {/* <<<<<<<<<<<<< Mode Button >>>>>>>>*/}
-          <button
-            onClick={changeMode}
-            className="text-blue-900 bg-[var(--bgHeader)] w-12 h-12 border border-[#d3d3d364] hover:border-[#dddcdcb3] shadow-lg rounded-full flex items-center justify-center active:scale-75 transition-all duration-500"
-          >
-            {mode === "dark" ? (
-              <i className="fa-solid fa-moon text-[25px] text-[var(--title)]"></i>
-            ) : (
-              <i className="fa-solid fa-sun text-[25px] text-orange-400"></i>
-            )}
-          </button>
         </div>
       </nav>
     </>

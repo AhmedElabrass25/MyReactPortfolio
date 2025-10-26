@@ -1,79 +1,95 @@
-import apiImage from "../../assets/images/api.webp";
-import appImage from "../../assets/images/app.webp";
-import manageImage from "../../assets/images/manage.webp";
-import speedImage from "../../assets/images/speed.webp";
-import responsiveImage from "../../assets/images/responsive.webp";
-import interfaceImage from "../../assets/images/interface.webp";
+import {
+  FaCode,
+  FaGlobe,
+  FaBolt,
+  FaCogs,
+  FaMobileAlt,
+  FaPaintBrush,
+} from "react-icons/fa";
 
 const Services = () => {
-  const services = [
+  const servicesData = [
     {
-      image: apiImage,
+      icon: FaCode, // Replaced apiImage
       title: "API Integrations",
       description:
-        "Seamless integration for smooth data sharing and functionality.",
+        "Seamlessly connect third-party services for smooth data sharing and enhanced application functionality.",
+      color: "text-red-500",
     },
     {
-      image: appImage,
+      icon: FaGlobe, // Replaced appImage
       title: "Web Applications",
-      description: "Tailored web apps built with the latest technologies.",
+      description:
+        "Build robust, scalable, and tailored web applications using the latest frontend technologies (React/Next.js).",
+      color: "text-blue-500",
     },
     {
-      image: manageImage,
+      icon: FaCogs, // Replaced manageImage
       title: "Website Management",
-      description: "Easy content management systems with flexible controls.",
+      description:
+        "Implement easy content management systems (CMS) and provide flexible controls for effortless updates and maintenance.",
+      color: "text-yellow-500",
     },
     {
-      image: speedImage,
+      icon: FaBolt, // Replaced speedImage
       title: "Speed Optimization",
-      description: "Boost performance with faster load times and optimization.",
+      description:
+        "Dramatically boost performance with technical optimizations, resulting in faster load times and higher search rankings.",
+      color: "text-green-500",
     },
     {
-      image: responsiveImage,
+      icon: FaMobileAlt, // Replaced responsiveImage
       title: "Responsive Designs",
       description:
-        "Adaptive designs that fit all screens, ensuring great user experiences.",
+        "Craft adaptive, mobile-first designs that look and function perfectly on all devices, ensuring a consistent user experience.",
+      color: "text-indigo-500",
     },
     {
-      image: interfaceImage,
-      title: "User Interfaces",
+      icon: FaPaintBrush, // Replaced interfaceImage
+      title: "User Interfaces (UI)",
       description:
-        "Engaging, responsive front-end designs enhancing user interactions.",
+        "Design engaging, intuitive, and modern front-end interfaces that prioritize user interaction and visual appeal.",
+      color: "text-pink-500",
     },
   ];
+
   return (
-    <>
-      <section className="py-14 mt-5" id="skills">
-        {/* <<<<<<<<<< Title >>>>>>>>>>> */}
-        <h1 className="text-3xl font-bold capitalize w-full text-center mb-12">
-          How can i help you ?
+    <section className="py-20" id="features">
+      <div className="container mx-auto px-4">
+        {/* Title */}
+        <h1 className="text-4xl sm:text-5xl font-extrabold capitalize w-full text-center mb-16 text-gray-900 dark:text-white">
+          How Can I Help You?
         </h1>
-        <div className="container">
-          <div className="row justify-between gap-10 md:gap-14">
-            {services.map((serv, index) => {
-              return (
-                <div
-                  key={index}
-                  className="w-full sm:w-[49%] md:w-[42%] p-8 rounded-md border--[2px] border-[var(--border)] bg-[var(--bgHeader)] flex flex-col items-center justify-center hover:border-[var(--subtitle)] hover:border-[2px] transition-all duration-300"
-                >
-                  <img
-                    src={serv.image}
-                    alt={serv.title}
-                    className="mb-5 w-14 h-14"
-                  />
-                  <h1 className="mb-5 capitalize text-lg  xl:text-2xl font-bold text-[var(--title)] ">
-                    {serv.title}
-                  </h1>
-                  <p className="text-[var(--subtitle)] w-full text-center line-clamp-2">
-                    {serv.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {servicesData.map((serv, index) => {
+            const IconComponent = serv.icon; // Component from react-icons
+            return (
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-2xl hover:border-blue-500 dark:hover:border-blue-400 transform hover:-translate-y-1 flex flex-col items-center text-center"
+              >
+                {/* Icon */}
+                <IconComponent
+                  className={`mb-5 w-16 h-16 ${serv.color} dark:text-white dark:bg-opacity-10 dark:bg-blue-400 p-2 rounded-lg`}
+                />
+
+                {/* Title */}
+                <h2 className="mb-3 capitalize text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
+                  {serv.title}
+                </h2>
+
+                {/* Description */}
+                <p className="text-gray-600 dark:text-gray-400 w-full text-center text-base flex-grow">
+                  {serv.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

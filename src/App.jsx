@@ -10,7 +10,7 @@ import Services from "./components/Services/Services";
 
 const App = () => {
   return (
-    <section id="skills">
+    <section>
       <div className="container">
         <BrowserRouter>
           <Toaster />

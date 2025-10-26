@@ -28,7 +28,8 @@ import twitterApp from "../assets/images/twitterImage.png";
 import advancedTodo from "../assets/images/todoImage.png";
 import NextjsEcommerce from "../assets/images/NextjsEcommerce.png";
 import xoGame from "../assets/images/x-oGame.png";
-
+import lms from "../assets/images/lms.png";
+import restaurant from "../assets/images/restaurant(Supabase).png";
 export const Projects = [
   {
     id: 1,
@@ -269,5 +270,21 @@ export const Projects = [
     demo: "https://x-o-game-nextjs.vercel.app",
     category: "nextjs",
     image: xoGame,
+  },
+  {
+    id: 31,
+    name: "LMS App",
+    desc: "EDU_MASTER is a full-featured Learning Management System that allows administrators and students to manage lessons, exams, and results in an interactive way.It provides an intuitive dashboard, real-time validations, and smooth UI interactions using modern web technologies.",
+    demo: "https://coruscating-fudge-d701d9.netlify.app",
+    category: "reactjs",
+    image: lms,
+  },
+  {
+    id: 32,
+    name: "Reasturant App (supabase)",
+    desc: "My Restaurant is a modern web application for browsing and ordering food online using Supabase.It includes product listing, detailed product view, cart management, authentication, order tracking, and an admin dashboard for managing products.",
+    demo: "https://restaurant-peach-one.vercel.app",
+    category: "reactjs",
+    image: restaurant,
   },
 ];

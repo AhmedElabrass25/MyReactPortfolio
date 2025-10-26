@@ -42,7 +42,7 @@ body {
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: var(--secondary);
+  /* background-color: var(--secondary); */
 }
 
 .row {
@@ -59,27 +59,46 @@ body {
 }
 
 /* <<<<<<<<<<<<<<<ScollarBar>>>>>>>>>>>>>> */
-
 ::-webkit-scrollbar {
-  width: 0.88rem;
+  width: 0.75rem;
 }
 
+/* --- Dark Mode Scrollbar (Subtle Look) --- */
 ::-webkit-scrollbar-track {
-  border: 7px solid var(--secondary);
-  box-shadow: inset 0 0 2.5px 2px rgba(0, 0, 0, 0.5);
+  /* Track color remains deep dark background */
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  background-color: #d4d4d8;
+  background-color: var(--primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(80, 79, 79);
+  /* Changed to a subtle, fixed dark gray (#444) for better contrast and less brightness than --subtitle */
+  background: #303f5f;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  /* Changed to a slightly lighter, fixed gray (#666) for a smooth, non-distracting hover effect */
+  background: #31394d;
 }
 
+/* --- Light Mode Scrollbar (Clear Contrast) --- */
+body.light ::-webkit-scrollbar-track {
+  /* Track remains white background */
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary);
+}
+
+body.light ::-webkit-scrollbar-thumb {
+  /* Uses the dark subtitle color for excellent contrast */
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+body.light ::-webkit-scrollbar-thumb:hover {
+  /* Uses the accent blue for a clear and distinct light-mode hover state */
+  background: var(--blue);
+}
 /* <<<<<<<<<<<<<< mainSection >>>>>>>>>>>> */
 
 .mainSection .card {
