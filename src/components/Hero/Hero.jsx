@@ -54,16 +54,8 @@ const Hero = () => {
             </p>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-x-5">
+            <div className="flex items-center gap-x-7">
               {/* GitHub */}
-              <Link
-                to="https://github.com/AhmedElabrass25"
-                target="_blank"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-              >
-                <i className="fa-brands fa-github text-3xl"></i>
-              </Link>
-              {/* WhatsApp */}
               <a
                 rel="noopener noreferrer"
                 href="https://wa.me/201208448553"
@@ -72,16 +64,18 @@ const Hero = () => {
               >
                 <i className="fa-brands fa-whatsapp text-3xl"></i>
               </a>
-              {/* Facebook */}
               <Link
-                to="#"
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-800 transition-colors duration-300"
+                to="https://github.com/AhmedElabrass25"
+                target="_blank"
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
               >
-                <i className="fa-brands fa-facebook text-3xl"></i>
+                <i className="fa-brands fa-github text-3xl"></i>
               </Link>
+              {/* WhatsApp */}
+
               {/* LinkedIn */}
               <Link
-                to="#"
+                to="https://www.linkedin.com/in/ahmed-elabrass-712451347"
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-700 transition-colors duration-300"
               >
                 <i className="fa-brands fa-linkedin text-3xl"></i>
