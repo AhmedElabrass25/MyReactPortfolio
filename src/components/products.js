@@ -19,7 +19,6 @@ import noteAppIMage from "../assets/images/noteapp.png";
 import linkedinImage from "../assets/images/linkedin.png";
 import aroundTheWorld from "../assets/images/aroundTheWorld.png";
 import weatherApp from "../assets/images/WaetherApp.png";
-import newsApp from "../assets/images/newsAppImage.png";
 import KanbanApp from "../assets/images/kanbanApp.png";
 import dashboardApp from "../assets/images/dashboardApp.png";
 import socialApp from "../assets/images/socialApp.png";
@@ -30,55 +29,8 @@ import NextjsEcommerce from "../assets/images/NextjsEcommerce.png";
 import xoGame from "../assets/images/x-oGame.png";
 import lms from "../assets/images/lms.png";
 import restaurant from "../assets/images/restaurant(Supabase).png";
+import wildOasisImage from "../assets/images/wildOasis.png";
 export const Projects = [
-  {
-    id: 1,
-    name: "Refresh Ecommerce",
-    desc: "A Refresh E-commerce website is typically designed to provide users with a seamless and modern online shopping experience. It focuses on user-friendly navigation, attractive product displays, and smooth interactions, all while maintaining high performance and responsiveness.",
-    demo: "https://react-ecommercefresh.vercel.app",
-    category: "react",
-    image: refreshEcommerce,
-  },
-  {
-    id: 2,
-    name: "Movieo Website",
-    desc: "The Movieo Website is a dynamic platform designed to provide users with an engaging experience for discovering, exploring, and tracking movies and TV shows. It offers detailed information about movies, including ratings, reviews, trailers, and cast details, creating an immersive and interactive environment for movie enthusiasts.",
-    demo: "https://movieoapp-lilac.vercel.app",
-    category: "react",
-    image: Movieo,
-  },
-  {
-    id: 3,
-    name: "Shopping Cart",
-    desc: "The Shopping Cart is a crucial component of an e-commerce platform, designed to provide users with a seamless and efficient shopping experience. It allows customers to select, review, and manage products before proceeding to checkout, ensuring a smooth purchasing process.",
-    demo: "https://shopping-cart-redux-toolkit-three.vercel.app",
-    category: "react&redux",
-    image: ShoppingCart,
-  },
-  {
-    id: 4,
-    name: "Meals",
-    desc: "The Meals App is a user-friendly platform designed to help users discover, explore, and organize delicious recipes from around the world. It offers a seamless and engaging experience for food enthusiasts, enabling them to find new dishes, view detailed recipes, and manage their favorite meals effortlessly.",
-    demo: "https://meals-react-project.vercel.app",
-    category: "react&tailwind",
-    image: mealsImage,
-  },
-  {
-    id: 5,
-    name: "Nike",
-    desc: "The Nike App is a comprehensive digital platform designed to enhance the shopping and brand experience for Nike customers. It seamlessly integrates shopping, personalized recommendations, and community engagement, providing users with a dynamic and interactive way to explore the latest Nike products, trends, and exclusive content.",
-    demo: "https://first-tailwind-project-zeta.vercel.app",
-    category: "react&tailwind",
-    image: nikeImage,
-  },
-  {
-    id: 6,
-    name: "MovieApp",
-    desc: "MovieApp is a dynamic web application that allows users to explore and discover movies. Built with React, it integrates with a third-party movie API to fetch and display information about the latest films, popular titles, and top-rated movies,Display Movies by searching and display watched and watchlist movies. ",
-    demo: "https://react-movies-app-ebon.vercel.app",
-    category: "react&tailwind",
-    image: movieImage,
-  },
   {
     id: 7,
     name: "Todo App",
@@ -167,6 +119,7 @@ export const Projects = [
     category: "html&css&js",
     image: onlinestoreImage,
   },
+  // =============Next.js Projects================
   {
     id: 18,
     name: "Note App",
@@ -176,52 +129,20 @@ export const Projects = [
     image: noteAppIMage,
   },
   {
-    id: 19,
-    name: "Linkedin Clone",
-    desc: "The LinkedIn Clone is  fully responsive social networking platform designed to connect professionals. This web application replicates key LinkedIn features, enabling users to sign in securely with Google Authentication, create and share posts, engage with others, and build a personal or professional network.",
-    demo: "https://linkedin-clone-5db25.web.app",
-    category: "reactjs",
-    image: linkedinImage,
-  },
-  {
-    id: 20,
-    name: "Around The World",
-    desc: "Around the World is a website designed to provide users with detailed information about countries across the globe. It allows users to explore different nations, view their flags, capitals, populations, regions, languages, and currencies. The platform includes features like search, filtering by region, and detailed country pages. Additionally, it ensures offline accessibility by storing data in local storage. With a user-friendly interface and a dark/light theme toggle, it enhances the browsing experience for users worldwide",
-    demo: "https://arround-the-world.vercel.app",
-    category: "reactjs",
-    image: aroundTheWorld,
-  },
-  {
-    id: 21,
-    name: "Weather App",
-    desc: "WeatherApp is a user-friendly application that provides real-time weather updates for cities around the world. It features current temperature, humidity, wind speed, and a 7-day forecast with dynamic icons and background changes based on weather conditions. The app is built with modern frontend technologies, ensuring a responsive and smooth user experience. It also integrates geolocation to fetch local weather automatically.",
-    demo: "https://react-weather-app-sage-seven.vercel.app",
-    category: "reactjs",
-    image: weatherApp,
-  },
-  {
-    id: 22,
-    name: "News App",
-    desc: "Itis a modern and user-friendly news app that keeps you updated with the latest headlines from around the world. Whether you're interested in politics, technology, sports, entertainment, or business, our app delivers real-time news tailored to your interests.",
-    demo: "https://react-news-app-steel.vercel.app",
-    category: "reactjs",
-    image: newsApp,
-  },
-  {
-    id: 23,
-    name: "Kanban App",
-    desc: "A Kanban App is a project management tool that helps teams visualize workflows, track progress, and manage tasks efficiently. It is based on the Kanban methodology, which organizes tasks into stages such as To Do, In Progress, and Done.",
-    demo: "https://kanban-app-six-sepia.vercel.app",
-    category: "reactjs",
-    image: KanbanApp,
-  },
-  {
-    id: 24,
-    name: "Dashboard App",
-    desc: "The Dashboard provides a centralized view for users to monitor and manage key aspects of their account or application. It displays real-time data, summaries, and analytics in an organized and visually appealing layout. Users can quickly access important actions, track performance metrics, and stay informed about recent activity or system updates — all from a single, user-friendly interface.",
-    demo: "https://dashboard-app-nextjs-drab.vercel.app",
+    id: 29,
+    name: "Advanced Ecommerce App",
+    desc: "A powerful and modern E-commerce application built with a clean and responsive user interface. This app fetches product data dynamically from an external API and offers users a smooth and intuitive shopping experience.",
+    demo: "https://ecommerce-nextjs-orcin-iota.vercel.app/",
     category: "nextjs",
-    image: dashboardApp,
+    image: NextjsEcommerce,
+  },
+  {
+    id: 33,
+    name: "Wild Oasis (supabase)",
+    desc: "Built a fully functional hotel reservation system featuring cabin listings, real-time booking management, date validation, and user authentication. Implemented responsive UI, dynamic routing, and advanced form handling using React, Next.js, and Server Actions. Added pricing logic, availability checks, and a smooth booking flow for guests.",
+    demo: "https://the-wild-oasis-eta-taupe.vercel.app",
+    category: "next.js",
+    image: wildOasisImage,
   },
   {
     id: 25,
@@ -240,6 +161,15 @@ export const Projects = [
     image: amazonApp,
   },
   {
+    id: 24,
+    name: "Dashboard App",
+    desc: "The Dashboard provides a centralized view for users to monitor and manage key aspects of their account or application. It displays real-time data, summaries, and analytics in an organized and visually appealing layout. Users can quickly access important actions, track performance metrics, and stay informed about recent activity or system updates — all from a single, user-friendly interface.",
+    demo: "https://dashboard-app-nextjs-drab.vercel.app",
+    category: "nextjs",
+    image: dashboardApp,
+  },
+
+  {
     id: 27,
     name: "Twitter Clone",
     desc: "A full-featured Twitter Clone built with modern web technologies to replicate the core functionality and user experience of the popular social media platform. This project demonstrates real-world skills in frontend development, UI/UX design, and state management.",
@@ -255,14 +185,7 @@ export const Projects = [
     category: "nextjs",
     image: advancedTodo,
   },
-  {
-    id: 29,
-    name: "Advanced Ecommerce App",
-    desc: "A powerful and modern E-commerce application built with a clean and responsive user interface. This app fetches product data dynamically from an external API and offers users a smooth and intuitive shopping experience.",
-    demo: "https://ecommerce-nextjs-orcin-iota.vercel.app/",
-    category: "nextjs",
-    image: NextjsEcommerce,
-  },
+
   {
     id: 30,
     name: "Advanced x_o Game App",
@@ -270,6 +193,39 @@ export const Projects = [
     demo: "https://x-o-game-nextjs.vercel.app",
     category: "nextjs",
     image: xoGame,
+  },
+  // ===================React.js Projects================
+  {
+    id: 1,
+    name: "Refresh Ecommerce",
+    desc: "A Refresh E-commerce website is typically designed to provide users with a seamless and modern online shopping experience. It focuses on user-friendly navigation, attractive product displays, and smooth interactions, all while maintaining high performance and responsiveness.",
+    demo: "https://react-ecommercefresh.vercel.app",
+    category: "react",
+    image: refreshEcommerce,
+  },
+  {
+    id: 2,
+    name: "Movieo Website",
+    desc: "The Movieo Website is a dynamic platform designed to provide users with an engaging experience for discovering, exploring, and tracking movies and TV shows. It offers detailed information about movies, including ratings, reviews, trailers, and cast details, creating an immersive and interactive environment for movie enthusiasts.",
+    demo: "https://movieoapp-lilac.vercel.app",
+    category: "react",
+    image: Movieo,
+  },
+  {
+    id: 32,
+    name: "Reasturant App (supabase)",
+    desc: "My Restaurant is a modern web application for browsing and ordering food online using Supabase.It includes product listing, detailed product view, cart management, authentication, order tracking, and an admin dashboard for managing products.",
+    demo: "https://restaurant-peach-one.vercel.app",
+    category: "reactjs",
+    image: restaurant,
+  },
+  {
+    id: 23,
+    name: "Kanban App",
+    desc: "A Kanban App is a project management tool that helps teams visualize workflows, track progress, and manage tasks efficiently. It is based on the Kanban methodology, which organizes tasks into stages such as To Do, In Progress, and Done.",
+    demo: "https://kanban-app-six-sepia.vercel.app",
+    category: "reactjs",
+    image: KanbanApp,
   },
   {
     id: 31,
@@ -280,11 +236,59 @@ export const Projects = [
     image: lms,
   },
   {
-    id: 32,
-    name: "Reasturant App (supabase)",
-    desc: "My Restaurant is a modern web application for browsing and ordering food online using Supabase.It includes product listing, detailed product view, cart management, authentication, order tracking, and an admin dashboard for managing products.",
-    demo: "https://restaurant-peach-one.vercel.app",
+    id: 20,
+    name: "Around The World",
+    desc: "Around the World is a website designed to provide users with detailed information about countries across the globe. It allows users to explore different nations, view their flags, capitals, populations, regions, languages, and currencies. The platform includes features like search, filtering by region, and detailed country pages. Additionally, it ensures offline accessibility by storing data in local storage. With a user-friendly interface and a dark/light theme toggle, it enhances the browsing experience for users worldwide",
+    demo: "https://arround-the-world.vercel.app",
     category: "reactjs",
-    image: restaurant,
+    image: aroundTheWorld,
+  },
+  {
+    id: 3,
+    name: "Shopping Cart",
+    desc: "The Shopping Cart is a crucial component of an e-commerce platform, designed to provide users with a seamless and efficient shopping experience. It allows customers to select, review, and manage products before proceeding to checkout, ensuring a smooth purchasing process.",
+    demo: "https://shopping-cart-redux-toolkit-three.vercel.app",
+    category: "react&redux",
+    image: ShoppingCart,
+  },
+  {
+    id: 4,
+    name: "Meals",
+    desc: "The Meals App is a user-friendly platform designed to help users discover, explore, and organize delicious recipes from around the world. It offers a seamless and engaging experience for food enthusiasts, enabling them to find new dishes, view detailed recipes, and manage their favorite meals effortlessly.",
+    demo: "https://meals-react-project.vercel.app",
+    category: "react&tailwind",
+    image: mealsImage,
+  },
+  {
+    id: 5,
+    name: "Nike",
+    desc: "The Nike App is a comprehensive digital platform designed to enhance the shopping and brand experience for Nike customers. It seamlessly integrates shopping, personalized recommendations, and community engagement, providing users with a dynamic and interactive way to explore the latest Nike products, trends, and exclusive content.",
+    demo: "https://first-tailwind-project-zeta.vercel.app",
+    category: "react&tailwind",
+    image: nikeImage,
+  },
+  {
+    id: 6,
+    name: "MovieApp",
+    desc: "MovieApp is a dynamic web application that allows users to explore and discover movies. Built with React, it integrates with a third-party movie API to fetch and display information about the latest films, popular titles, and top-rated movies,Display Movies by searching and display watched and watchlist movies. ",
+    demo: "https://react-movies-app-ebon.vercel.app",
+    category: "react&tailwind",
+    image: movieImage,
+  },
+  {
+    id: 19,
+    name: "Linkedin Clone",
+    desc: "The LinkedIn Clone is  fully responsive social networking platform designed to connect professionals. This web application replicates key LinkedIn features, enabling users to sign in securely with Google Authentication, create and share posts, engage with others, and build a personal or professional network.",
+    demo: "https://linkedin-clone-5db25.web.app",
+    category: "reactjs",
+    image: linkedinImage,
+  },
+  {
+    id: 21,
+    name: "Weather App",
+    desc: "WeatherApp is a user-friendly application that provides real-time weather updates for cities around the world. It features current temperature, humidity, wind speed, and a 7-day forecast with dynamic icons and background changes based on weather conditions. The app is built with modern frontend technologies, ensuring a responsive and smooth user experience. It also integrates geolocation to fetch local weather automatically.",
+    demo: "https://react-weather-app-sage-seven.vercel.app",
+    category: "reactjs",
+    image: weatherApp,
   },
 ];

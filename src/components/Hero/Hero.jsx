@@ -75,7 +75,8 @@ const Hero = () => {
 
               {/* LinkedIn */}
               <Link
-                to="https://www.linkedin.com/in/ahmed-elabrass-712451347"
+                to="https://www.linkedin.com/in/ahmed-elabrass012"
+                target="_blank"
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-700 transition-colors duration-300"
               >
                 <i className="fa-brands fa-linkedin text-3xl"></i>
