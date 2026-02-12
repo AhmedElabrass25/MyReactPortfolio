@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import { Link } from "react-router-dom";
 import computerAnimation from "../../assets/animation/computer.json";
 import { motion } from "framer-motion";
-import avatarUrl from "../../assets/images/ahmedimage.jpg";
+import avatarUrl from "../../assets/images/ahmedimage.webp";
 const Hero = () => {
   // Placeholder image URL for the avatar
   const fullName = "Ahmed Mohamed";
@@ -37,7 +37,7 @@ const Hero = () => {
               transition={{ duration: 0.8 }}
               className="w-full capitalize text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 text-gray-900 dark:text-white"
             >
-              Frontend React Developer
+              Fullstack Developer
             </motion.h1>
 
             {/* Introduction */}

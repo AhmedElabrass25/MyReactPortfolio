@@ -11,7 +11,7 @@ import Services from "./components/Services/Services";
 const App = () => {
   return (
     <section>
-      <div className="container">
+      <div className="">
         <BrowserRouter>
           <Toaster />
           <Header />

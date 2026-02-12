@@ -97,8 +97,8 @@ const Header = () => {
       </button>
 
       {/* The Navbar */}
-      <nav className="the-navbar bg-[#f9fafb] dark:bg-[#111827] py-5 px-4 sticky top-0 z-50 shadow-md transition-colors duration-300">
-        <div className="container mx-auto flex flex-wrap items-center justify-between py-5">
+      <nav className="the-navbar bg-[#f9fafb] dark:bg-[#111827] py-2 px-4 sticky top-0 z-50 shadow-md transition-colors duration-300">
+        <div className="container mx-auto flex flex-wrap items-center justify-between py-1">
           {/* <<<<<<< Logo >>>>>>> */}
           <HashLink to={"#"} className={`flex items-center justify-center`}>
             <ImProfile className="text-blue-600 dark:text-blue-400 text-4xl" />

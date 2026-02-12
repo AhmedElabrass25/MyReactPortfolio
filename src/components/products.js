@@ -1,35 +1,38 @@
-import refreshEcommerce from "../assets/images/refreshecommerce.png";
-import Movieo from "../assets/images/movieoapp.png";
-import ShoppingCart from "../assets/images/reduxshopingcart.png";
-import mealsImage from "../assets/images/mealsapp.png";
-import mealsPro from "../assets/images/mealspro.png";
-import nikeImage from "../assets/images/tailwindpro.png";
-import movieImage from "../assets/images/movieapp(contextapi).png";
-import todoImage from "../assets/images/todoapp.png";
-import crudImage from "../assets/images/crud.png";
-import bookmarkImage from "../assets/images/bookmarkapp.png";
-import facebookImage from "../assets/images/facebookclone.png";
-import ecommerceImage from "../assets/images/simpleEcommeceApp.png";
-import quizImage from "../assets/images/quizapp.png";
-import templateImage from "../assets/images/templateos.png";
-import portfolioImage from "../assets/images/portfolioapp.png";
-import gameappImage from "../assets/images/gameapp.png";
-import onlinestoreImage from "../assets/images/onlinestore.png";
-import noteAppIMage from "../assets/images/noteapp.png";
-import linkedinImage from "../assets/images/linkedin.png";
-import aroundTheWorld from "../assets/images/aroundTheWorld.png";
-import weatherApp from "../assets/images/WaetherApp.png";
-import KanbanApp from "../assets/images/kanbanApp.png";
-import dashboardApp from "../assets/images/dashboardApp.png";
-import socialApp from "../assets/images/socialApp.png";
-import amazonApp from "../assets/images/amazonPicture.png";
-import twitterApp from "../assets/images/twitterImage.png";
-import advancedTodo from "../assets/images/todoImage.png";
-import NextjsEcommerce from "../assets/images/NextjsEcommerce.png";
-import xoGame from "../assets/images/x-oGame.png";
-import lms from "../assets/images/lms.png";
-import restaurant from "../assets/images/restaurant(Supabase).png";
-import wildOasisImage from "../assets/images/wildOasis.png";
+import refreshEcommerce from "../assets/images/refreshecommerce.webp";
+import Movieo from "../assets/images/movieoapp.webp";
+import ShoppingCart from "../assets/images/reduxshopingcart.webp";
+import mealsImage from "../assets/images/mealsapp.webp";
+import mealsPro from "../assets/images/mealspro.webp";
+import nikeImage from "../assets/images/tailwindpro.webp";
+import movieImage from "../assets/images/movieapp(contextapi).webp";
+import todoImage from "../assets/images/todoapp.webp";
+import crudImage from "../assets/images/crud.webp";
+import bookmarkImage from "../assets/images/bookmarkapp.webp";
+import facebookImage from "../assets/images/facebookclone.webp";
+import ecommerceImage from "../assets/images/simpleEcommeceApp.webp";
+import quizImage from "../assets/images/quizapp.webp";
+import templateImage from "../assets/images/templateos.webp";
+import portfolioImage from "../assets/images/portfolioapp.webp";
+import gameappImage from "../assets/images/gameapp.webp";
+import onlinestoreImage from "../assets/images/onlinestore.webp";
+import noteAppIMage from "../assets/images/noteapp.webp";
+import linkedinImage from "../assets/images/linkedin.webp";
+import aroundTheWorld from "../assets/images/aroundTheWorld.webp";
+import weatherApp from "../assets/images/WaetherApp.webp";
+import KanbanApp from "../assets/images/kanbanApp.webp";
+import dashboardApp from "../assets/images/dashboardApp.webp";
+import socialApp from "../assets/images/socialApp.webp";
+import amazonApp from "../assets/images/amazonPicture.webp";
+import twitterApp from "../assets/images/twitterImage.webp";
+import advancedTodo from "../assets/images/todoImage.webp";
+import NextjsEcommerce from "../assets/images/NextjsEcommerce.webp";
+import xoGame from "../assets/images/x-oGame.webp";
+import lms from "../assets/images/lms.webp";
+import restaurant from "../assets/images/restaurant(Supabase).webp";
+import wildOasisImage from "../assets/images/wildOasis.webp";
+import quran1 from "../assets/images/quran1.webp";
+import dashboardApp_nextjs from "../assets/images/dashIMage.webp";
+
 export const Projects = [
   {
     id: 7,
@@ -290,5 +293,21 @@ export const Projects = [
     demo: "https://react-weather-app-sage-seven.vercel.app",
     category: "reactjs",
     image: weatherApp,
+  },
+  {
+    id: 218,
+    name: "Dashboard App (Next.js)",
+    desc: "“Premium Enterprise Dashboard – Next.js & React Project” Developed a high-performance ERP dashboard using Next.js 15 and React 19 featuring a modern Glassmorphism design, smooth animations, and robust management tools for HR and Finance teams with advanced analytics including interactive charts, revenue insights, attendance trends, and workforce distribution, HR management with full employee CRUD, smart search and filters, stable navigation, and seamless add employee flow, smart attendance system with table and calendar views, detail panels, custom notes, and interactive attendance marking, secure authentication and profiles with modern login and registration flows, enhanced validation, and user profile personalization. Built with Tailwind CSS, Lucide Icons, date-fns, and mock JSON backend, emphasizing premium visuals, intuitive user experience, and responsive, accessible design.",
+    demo: "https://dashboardnextjs-navy.vercel.app/",
+    category: "nextjs",
+    image: dashboardApp_nextjs,
+  },
+  {
+    id: 223,
+    name: "Quran App (React.js)",
+    desc: "Developed a full-featured Quran application using React.js, offering a complete digital experience for users with the full Quran text and audio recitations for every verse, tafsir (interpretation) to understand meanings, a hadiths collection for daily guidance, prayer times and notifications to keep users aware of Salah, and Islamic radio streaming for live audio content. This project demonstrates advanced React skills, including state management, API integration, audio handling, and dynamic UI, making it ideal for showcasing frontend development and interactive app design.",
+    demo: "https://you-are-a-senior-full-stack-web-dev.vercel.app/",
+    category: "reactjs",
+    image: quran1,
   },
 ];
