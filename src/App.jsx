@@ -7,6 +7,7 @@ import Contact from "./components/Contact/Contact";
 import Skills from "./components/Skills/Skills";
 import { Toaster } from "react-hot-toast";
 import Services from "./components/Services/Services";
+import Experience from "./components/Experience/Experience";
 
 const App = () => {
   return (
@@ -20,6 +21,8 @@ const App = () => {
           <Skills />
           <div className="line"></div>
           <Services />
+          <div className="line"></div>
+          <Experience />
           <div className="line"></div>
           <Main />
           <div className="line"></div>

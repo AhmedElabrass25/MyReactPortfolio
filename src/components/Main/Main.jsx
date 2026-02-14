@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { Projects } from "../products";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import ProjectModal from "./ProjectModal";
+import ScrollReveal from "../Shared/ScrollReveal";
+
+const ITEMS_PER_PAGE = 6;
 
 const TABS = [
   { id: "tab1", label: "all projects", filter: () => true },
@@ -13,12 +17,21 @@ const TABS = [
   },
   { id: "tab4", label: "react", filter: (p) => p.category.includes("react") },
   { id: "tab5", label: "nextJs", filter: (p) => p.category.includes("next") },
+  { id: "tab6", label: "Backend", filter: (p) => p.category === "backend" },
 ];
 
-const ITEMS_PER_PAGE = 6;
+const getGlowColor = (category) => {
+  if (category.includes("next") || category.includes("react"))
+    return "group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]";
+  if (category === "backend")
+    return "group-hover:shadow-[0_0_30px_-5px_rgba(139,92,246,0.3)]";
+  if (category.includes("js"))
+    return "group-hover:shadow-[0_0_30px_-5px_rgba(245,158,11,0.3)]";
+  return "group-hover:shadow-[0_0_30px_-5px_rgba(239,68,68,0.3)]";
+};
 
-// Project Card Component (for separation and clarity)
-const ProjectCard = ({ project }) => (
+// Project Card Component
+const ProjectCard = ({ project, onShowDetails }) => (
   <motion.div
     layout
     initial={{ opacity: 0, scale: 0.8 }}
@@ -26,39 +39,73 @@ const ProjectCard = ({ project }) => (
     exit={{ opacity: 0, scale: 0.8 }}
     transition={{ type: "spring", stiffness: 100, damping: 20 }}
     key={project.id}
-    className="card w-full bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1"
+    className={`card w-full bg-white dark:bg-gray-800/80 shadow-xl rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 hover:border-blue-500/50 dark:hover:border-blue-400/50 transition-all duration-500 group relative backdrop-blur-sm ${getGlowColor(
+      project.category
+    )}`}
   >
-    <div className="divImage aspect-video overflow-hidden">
-      <img
-        src={project.image}
-        className="w-full h-full object-cover transition duration-500 hover:scale-105"
-        alt={`Screenshot of ${project.name}`}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src =
-            "https://placehold.co/400x300/94a3b8/ffffff?text=Image+Error";
-        }}
-      />
+    {/* Device Frame Wrapper */}
+    <div className="p-3 pb-0">
+      <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-900 border-[6px] border-gray-900 shadow-2xl">
+        {/* Device Camera/Notch Mockup */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-gray-800 rounded-b-lg z-10"></div>
+
+        <img
+          src={project.image}
+          className="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1"
+          alt={`Screenshot of ${project.name}`}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://placehold.co/400x300/94a3b8/ffffff?text=Image+Error";
+          }}
+        />
+
+        {/* Shine Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
+
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-[2px]">
+          <button
+            onClick={() => onShowDetails(project)}
+            className="bg-white text-blue-600 px-6 py-2.5 rounded-full font-bold shadow-2xl transform translate-y-8 group-hover:translate-y-0 transition-all duration-500 hover:scale-105 active:scale-95"
+          >
+            Explore Project
+          </button>
+        </div>
+      </div>
     </div>
-    <div className="p-4 flex flex-col items-center text-center">
-      <h1 className="text-xl lg:text-2xl font-extrabold text-gray-900 dark:text-white mb-1 w-full line-clamp-1">
-        {project.name}
-      </h1>
-      <h3 className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3 w-full capitalize tracking-wider">
+
+    <div className="p-5 flex flex-col items-center text-center">
+      <div className="flex items-center gap-2 mb-2">
+        <h1 className="text-xl font-bold text-gray-900 dark:text-white line-clamp-1">
+          {project.name}
+        </h1>
+      </div>
+
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 mb-3 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
         {project.category}
-      </h3>
-      <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3 mb-4 flex-grow">
+      </span>
+
+      <p className="text-gray-500 dark:text-gray-400 text-sm line-clamp-2 mb-5 h-10 leading-relaxed font-medium">
         {project.desc}
       </p>
-      <Link
-        to={project.demo}
-        className="inline-flex items-center justify-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-all duration-300 font-medium py-2 px-4 border border-blue-100 dark:border-blue-800 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700"
-        target="_blank"
-      >
-        {/* Using Font Awesome as provided */}
-        <i className="fa-solid fa-earth-europe text-lg me-2"></i>
-        <span>Live Demo</span>
-      </Link>
+
+      <div className="flex gap-3 w-full">
+        <button
+          onClick={() => onShowDetails(project)}
+          className="flex-1 inline-flex items-center justify-center text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 bg-gray-50 dark:bg-gray-700/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 font-bold py-2.5 px-3 rounded-xl text-xs border border-transparent hover:border-blue-200 dark:hover:border-blue-800"
+        >
+          Details
+        </button>
+        <Link
+          to={project.category === "backend" ? project.github : project.demo}
+          className="flex-1 inline-flex items-center justify-center bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 font-bold py-2.5 px-3 rounded-xl text-xs shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40"
+          target="_blank"
+        >
+          <i className="fa-solid fa-earth-europe me-2"></i>
+          {project.category === "backend" ? "Source" : "Live"}
+        </Link>
+      </div>
     </div>
   </motion.div>
 );
@@ -66,6 +113,14 @@ const ProjectCard = ({ project }) => (
 const Main = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Calculate counts for each tab
+  const tabCounts = TABS.reduce((acc, tab) => {
+    acc[tab.id] = Projects.filter(tab.filter).length;
+    return acc;
+  }, {});
 
   const activeFilter =
     TABS.find((tab) => tab.id === activeTab)?.filter || (() => true);
@@ -78,6 +133,17 @@ const Main = () => {
     startIndex + ITEMS_PER_PAGE
   );
 
+  const handleShowDetails = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Optional: clear selected project after animation
+    setTimeout(() => setSelectedProject(null), 300);
+  };
+
   // Reset to first page when tab changes
   useEffect(() => {
     setCurrentPage(1);
@@ -89,46 +155,64 @@ const Main = () => {
       id="main"
     >
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl sm:text-5xl font-extrabold capitalize w-full text-center mb-16 text-gray-900 dark:text-white">
-          🚀 My Portfolio
-        </h1>
+        <ScrollReveal>
+          <h1 className="text-4xl sm:text-5xl font-extrabold capitalize w-full text-center mb-16 text-gray-900 dark:text-white">
+            🚀 My Portfolio
+          </h1>
+        </ScrollReveal>
 
         {/* Tabs */}
-        <div className="mb-12">
-          <ul
-            className="w-full flex flex-wrap items-center justify-center gap-3 sm:gap-4 lg:gap-6"
-            role="tablist"
-          >
-            {TABS.map((tab) => (
-              <li key={tab.id} role="presentation">
-                <button
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`inline-block px-4 py-2 border-2 rounded-full capitalize text-sm sm:text-base font-semibold transition duration-300 whitespace-nowrap ${
-                    activeTab === tab.id
-                      ? "border-blue-600 bg-blue-50 dark:bg-blue-900 text-blue-800 dark:text-blue-200 shadow-md"
-                      : "border-gray-300 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:border-blue-400"
-                  }`}
-                  type="button"
-                  role="tab"
-                  aria-controls={tab.id}
-                  aria-selected={activeTab === tab.id}
-                >
-                  {tab.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ScrollReveal delay={0.2}>
+          <div className="mb-16 flex justify-center">
+            <div className="bg-white dark:bg-gray-800 p-1.5 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 flex flex-wrap justify-center gap-1 relative overflow-hidden">
+              {TABS.map((tab) => {
+                const isActive = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`relative px-6 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-colors duration-300 flex items-center gap-2 group ${
+                      isActive 
+                        ? "text-white" 
+                        : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-blue-600 rounded-xl -z-10"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className="capitalize">{tab.label}</span>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full transition-colors ${
+                      isActive 
+                        ? "bg-blue-500 text-white" 
+                        : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 group-hover:bg-gray-200 dark:group-hover:bg-gray-600"
+                    }`}>
+                      {tabCounts[tab.id]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </ScrollReveal>
 
         {/* Project Cards Grid */}
-        <div
+        <motion.div
+          layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           role="tabpanel"
         >
           <AnimatePresence mode="wait">
             {currentProjects.length > 0 ? (
               currentProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onShowDetails={handleShowDetails}
+                />
               ))
             ) : (
               <motion.div
@@ -142,33 +226,52 @@ const Main = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-3 mt-16 flex-wrap">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => {
-                  setCurrentPage(page);
-                  // Ensure scrollIntoView works correctly
-                  document
-                    .getElementById("main")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-                className={`w-10 h-10 text-base rounded-full font-bold transition duration-300 border-2 ${
-                  currentPage === page
-                    ? "bg-blue-600 text-white border-blue-600 shadow-lg"
-                    : "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-600"
-                }`}
-              >
-                {page}
-              </button>
-            ))}
+          <div className="flex justify-center mt-20">
+            <div className="bg-white dark:bg-gray-800 p-2 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 flex items-center gap-2 backdrop-blur-sm">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                const isActive = currentPage === page;
+                return (
+                  <motion.button
+                    key={page}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                      setCurrentPage(page);
+                      document
+                        .getElementById("main")
+                        ?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className={`relative w-11 h-11 flex items-center justify-center rounded-xl text-base font-bold transition-colors duration-300 ${
+                      isActive
+                        ? "text-white"
+                        : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activePage"
+                        className="absolute inset-0 bg-blue-600 rounded-xl -z-10"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    {page}
+                  </motion.button>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
+
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 };

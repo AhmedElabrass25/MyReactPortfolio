@@ -2,35 +2,38 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { ImProfile } from "react-icons/im";
-import { FaSun, FaMoon, FaAngleUp } from "react-icons/fa"; // Using Fa icons for better styling
+import { FaSun, FaMoon, FaAngleUp } from "react-icons/fa";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
 const Header = () => {
   const location = useLocation();
-  // Ensure the hash starts with '#' for the root route
   const currentHash = location.hash || "#";
   const isActive = (hash) => currentHash === hash;
 
-  // <<<<<<<<<<<<<<<<<< State Management >>>>>>>>>>>>>>>>>>>>>>
   const [isOpened, setIsOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  
+  // Scroll Progress Logic
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-  // Use 'system' as initial mode to check user's preference or default to 'dark'
   const [mode, setMode] = useState(() => {
     if (typeof window !== "undefined" && localStorage.getItem("currentMode")) {
       return localStorage.getItem("currentMode");
     }
-    // Default to dark mode if no local storage value is found
     return "dark";
   });
 
-  // <<<<<<<< changeMode Function >>>>>>>>>>>
   function changeMode() {
     const newMode = mode === "dark" ? "light" : "dark";
     localStorage.setItem("currentMode", newMode);
     setMode(newMode);
   }
 
-  // Apply or remove 'dark' class on the body element
   useEffect(() => {
     const body = document.body;
     if (mode === "dark") {
@@ -42,7 +45,6 @@ const Header = () => {
     }
   }, [mode]);
 
-  // <<<<<<<<<<<<< Scroll Visibility Logic >>>>>>>>>>>>>
   const toggleVisibility = () => {
     if (window.scrollY > 300) {
       setIsVisible(true);
@@ -51,196 +53,145 @@ const Header = () => {
     }
   };
 
-  // <<<<<<<<<<< Scroll to top >>>>>>>
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
     window.addEventListener("scroll", toggleVisibility);
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
-  // Base classes for navigation links
-  const linkBaseClasses =
-    "block py-2 px-4 text-lg font-medium rounded-full transition-colors duration-200 cursor-pointer";
-  const linkDefaultClasses =
-    "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400";
-  const linkActiveClasses =
-    "text-white bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600";
+  const navLinks = [
+    { name: "About", hash: "#" },
+    { name: "Skills", hash: "#skills" },
+    { name: "Experience", hash: "#experience" },
+    { name: "Services", hash: "#features" },
+    { name: "Projects", hash: "#main" },
+    { name: "Contact", hash: "#contact" },
+  ];
 
   const getLinkClasses = (hash) => {
     const active = isActive(hash);
-    return `${linkBaseClasses} ${
-      active ? linkActiveClasses : linkDefaultClasses
+    return `relative px-4 py-2 text-sm font-bold transition-all duration-300 rounded-full flex items-center justify-center ${
+      active 
+        ? "text-white bg-blue-600 shadow-lg shadow-blue-500/20 scale-105" 
+        : "text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800/50"
     }`;
   };
 
   return (
     <>
-      {/* Scroll to Top Button */}
-      <button
-        onClick={scrollToTop}
-        aria-label="Scroll to top"
-        className={`fixed z-50 h-12 w-12 bottom-6 right-6 p-2 flex items-center justify-center rounded-full shadow-lg bg-blue-600 text-white transition-all duration-300 hover:bg-blue-700 hover:scale-110 ${
-          isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10 pointer-events-none"
-        }`}
-      >
-        <FaAngleUp className="text-xl" />
-      </button>
+      {/* Scroll to Top Button - Premium Styling */}
+      <AnimatePresence>
+        {isVisible && (
+          <motion.button
+            initial={{ opacity: 0, y: 20, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            className="fixed z-50 h-12 w-12 bottom-8 right-8 flex items-center justify-center rounded-2xl shadow-2xl bg-blue-600 text-white border border-white/20 backdrop-blur-sm"
+          >
+            <FaAngleUp className="text-xl" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-      {/* The Navbar */}
-      <nav className="the-navbar bg-[#f9fafb] dark:bg-[#111827] py-2 px-4 sticky top-0 z-50 shadow-md transition-colors duration-300">
-        <div className="container mx-auto flex flex-wrap items-center justify-between py-1">
-          {/* <<<<<<< Logo >>>>>>> */}
-          <HashLink to={"#"} className={`flex items-center justify-center`}>
-            <ImProfile className="text-blue-600 dark:text-blue-400 text-4xl" />
-            <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-white">
-              Portfolio
+      {/* The Navbar - Ultra Glassmorphism */}
+      <nav className="sticky top-0 z-[100] w-full transition-all duration-300 bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-800/50 h-20 flex items-center">
+        {/* Scroll Progress Bar */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-600 to-purple-500 origin-left z-[101]"
+          style={{ scaleX }}
+        />
+
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          {/* Logo Area */}
+          <HashLink to={"#"} className="group flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform">
+              <ImProfile className="text-2xl" />
+            </div>
+            <span className="text-xl font-black tracking-tight text-gray-900 dark:text-white uppercase">
+              Ahmed <span className="text-blue-600 dark:text-blue-400">Hub</span>
             </span>
           </HashLink>
 
-          <div className="flex items-center space-x-4">
-            {/* Mode Toggle Button (Visible on all screens) */}
-            <button
-              onClick={changeMode}
-              aria-label="Toggle dark/light mode"
-              className="w-10 h-10 border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 shadow-md rounded-full flex items-center justify-center transition-all duration-500 hover:ring-2 hover:ring-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-              {mode === "dark" ? (
-                <FaSun className="text-xl text-yellow-400" />
-              ) : (
-                <FaMoon className="text-xl text-gray-700" />
-              )}
-            </button>
-
-            {/* Bar Button (Mobile design) */}
-            <button
-              onClick={() => setIsOpened(!isOpened)}
-              type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:focus:ring-gray-600"
-              aria-controls="navbar-language"
-              aria-expanded={isOpened}
-            >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-2 p-1.5 bg-gray-100/50 dark:bg-gray-800/50 rounded-2xl border border-gray-200/50 dark:border-gray-700/50">
+            {navLinks.map((link) => (
+              <HashLink 
+                key={link.name}
+                to={`/${link.hash}`} 
+                className={getLinkClasses(link.hash)}
               >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-            </button>
+                {link.name}
+              </HashLink>
+            ))}
           </div>
 
-          {/* <<<<<<<<<<<< Desktop Links >>>>>>>>>>>>> */}
-          <div
-            className="hidden w-auto md:flex p-1 bg-gray-100 dark:bg-gray-800 rounded-full shadow-lg"
-            id="navbar-language"
-          >
-            <ul className="flex space-x-1">
-              <li>
-                <HashLink to="#" className={getLinkClasses("#")}>
-                  About
-                </HashLink>
-              </li>
-              <li>
-                <HashLink to="/#skills" className={getLinkClasses("#skills")}>
-                  Skills
-                </HashLink>
-              </li>
-              <li>
-                <HashLink
-                  to="/#features"
-                  className={getLinkClasses("#features")}
-                >
-                  Features
-                </HashLink>
-              </li>
-              <li>
-                <HashLink to="/#main" className={getLinkClasses("#main")}>
-                  Projects
-                </HashLink>
-              </li>
-              <li>
-                <HashLink to="/#contact" className={getLinkClasses("#contact")}>
-                  Contact
-                </HashLink>
-              </li>
-            </ul>
-          </div>
-
-          {/* <<<<<<<<<<< Mobile Links Dropdown >>>>>>>>>*/}
-          {isOpened && (
-            <div
-              className="absolute top-16 right-4 w-60 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-2xl md:hidden transition-opacity duration-300 transform origin-top-right"
-              id="navbar-mobile"
+          <div className="flex items-center gap-3">
+            {/* Mode Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={changeMode}
+              className="w-11 h-11 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center shadow-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500/50 transition-all"
             >
-              <ul className="flex flex-col space-y-2">
-                <li>
-                  <HashLink
-                    onClick={() => setIsOpened(false)}
-                    to="#"
-                    className={getLinkClasses("#")}
-                  >
-                    About
-                  </HashLink>
-                </li>
-                <li>
-                  <HashLink
-                    onClick={() => setIsOpened(false)}
-                    to="/#skills"
-                    className={getLinkClasses("#skills")}
-                  >
-                    Skills
-                  </HashLink>
-                </li>
-                <li>
-                  <HashLink
-                    onClick={() => setIsOpened(false)}
-                    to="/#features"
-                    className={getLinkClasses("#features")}
-                  >
-                    Features
-                  </HashLink>
-                </li>
-                <li>
-                  <HashLink
-                    onClick={() => setIsOpened(false)}
-                    to="/#main"
-                    className={getLinkClasses("#main")}
-                  >
-                    Projects
-                  </HashLink>
-                </li>
-                <li>
-                  <HashLink
-                    onClick={() => setIsOpened(false)}
-                    to="/#contact"
-                    className={getLinkClasses("#contact")}
-                  >
-                    Contact
-                  </HashLink>
-                </li>
-              </ul>
-            </div>
-          )}
+              {mode === "dark" ? <FaSun className="text-lg text-yellow-500" /> : <FaMoon className="text-lg" />}
+            </motion.button>
+
+            {/* Mobile Menu Toggle */}
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setIsOpened(!isOpened)}
+              className="lg:hidden w-11 h-11 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700"
+            >
+              <div className="w-6 flex flex-col items-end gap-1.5">
+                <span className={`h-0.5 bg-current transition-all duration-300 ${isOpened ? "w-6 rotate-45 translate-y-2" : "w-6"}`} />
+                <span className={`h-0.5 bg-current transition-all duration-300 ${isOpened ? "opacity-0" : "w-4"}`} />
+                <span className={`h-0.5 bg-current transition-all duration-300 ${isOpened ? "w-6 -rotate-45 -translate-y-2" : "w-5"}`} />
+              </div>
+            </motion.button>
+          </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {isOpened && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="absolute top-20 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 lg:hidden overflow-hidden shadow-2xl backdrop-blur-2xl"
+            >
+              <div className="container mx-auto px-4 py-8 flex flex-col gap-2">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    <HashLink
+                      onClick={() => setIsOpened(false)}
+                      to={`/${link.hash}`}
+                      className={`flex items-center justify-between p-4 rounded-2xl text-lg font-bold transition-all ${
+                        isActive(link.hash)
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                          : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+                      }`}
+                    >
+                      {link.name}
+                      {isActive(link.hash) && <div className="w-2 h-2 rounded-full bg-white animate-pulse" />}
+                    </HashLink>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
     </>
   );
