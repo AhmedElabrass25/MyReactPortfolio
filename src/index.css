@@ -29,7 +29,7 @@ html {
 
 body {
   background-color: var(--primary);
-  color: #fff;
+  color: var(--title);
   font-family: "Comfortaa", serif;
 }
 

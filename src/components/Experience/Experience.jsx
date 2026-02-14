@@ -31,7 +31,7 @@ const Experience = () => {
         "Managed version control and collaboration through GitHub",
         "Gained hands-on experience in the full project lifecycle from design to deployment"
       ],
-      color: "purple"
+      color: "blue"
     }
   ];
 

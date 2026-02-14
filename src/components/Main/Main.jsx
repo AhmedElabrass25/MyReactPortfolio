@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Projects } from "../products";
+import { Projects } from "../../data/projects";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectModal from "./ProjectModal";
@@ -82,7 +82,7 @@ const ProjectCard = ({ project, onShowDetails }) => (
         </h1>
       </div>
 
-      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 mb-3 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400 mb-3 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
         {project.category}
       </span>
 
@@ -174,7 +174,7 @@ const Main = () => {
                     className={`relative px-6 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-colors duration-300 flex items-center gap-2 group ${
                       isActive 
                         ? "text-white" 
-                        : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        : "text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
                     }`}
                   >
                     {isActive && (
