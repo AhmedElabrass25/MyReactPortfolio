@@ -1,0 +1,47 @@
+export const experiences = [
+  {
+    company: "Huma-volve",
+    role: "Backend Developer Intern",
+    duration: "Dec 2025 - Jan 2026 • 2 mos",
+    location: "Remote",
+    desc: "Worked on building scalable backend systems for production-level applications, including healthcare and fitness platforms.",
+    points: [
+      "Designed and implemented RESTful APIs using Laravel for booking, authentication, and subscription systems",
+      "Developed complex booking logic based on availability, scheduling, and user interactions",
+      "Built secure authentication and role-based access control for users and trainers",
+      "Integrated payment and subscription workflows for real-world use cases",
+      "Implemented real-time communication features (live chat) between users and service providers",
+      "Structured and optimized databases following clean architecture principles",
+    ],
+    color: "purple",
+  },
+  {
+    company: "Huma-volve",
+    role: "Frontend Developer Intern",
+    duration: "Dec 2025 - Jan 2026 • 2 mos",
+    location: "Remote",
+    desc: "Contributed to two major projects: a Doctor Appointment System (booking process) and a Flight Booking System (checkout and payment). Built responsive interfaces using React.js, Next.js, TypeScript, and Shadcn, managing server state with React Query.",
+    points: [
+      "Developed doctor booking logic based on available time slots",
+      "Implemented checkout and payment functionality for flight booking",
+      "Translated Figma designs into real UI components with Shadcn",
+      "Collaborated with backend teams to define API requests/responses",
+      "Managed version control using GitHub branching and PR workflows",
+    ],
+    color: "blue",
+  },
+  {
+    company: "Web Masters",
+    role: "Frontend Developer Intern",
+    duration: "Aug 2025 - Oct 2025 • 3 mos",
+    location: "Remote",
+    desc: "Collaborated on multiple projects including E-commerce platforms, Learning Management Systems (LMS), and a restaurant application.",
+    points: [
+      "Developed responsive user interfaces using React.js and Next.js",
+      "Integrated frontend with Supabase for real-time backend functionality",
+      "Managed version control and collaboration through GitHub",
+      "Gained hands-on experience in the full project lifecycle from design to deployment",
+    ],
+    color: "blue",
+  },
+];

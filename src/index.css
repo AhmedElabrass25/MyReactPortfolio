@@ -96,8 +96,24 @@ body.light ::-webkit-scrollbar-thumb {
 }
 
 body.light ::-webkit-scrollbar-thumb:hover {
-  /* Uses the accent blue for a clear and distinct light-mode hover state */
   background: var(--blue);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #3b82f640;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
 }
 /* <<<<<<<<<<<<<< mainSection >>>>>>>>>>>> */
 

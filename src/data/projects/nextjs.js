@@ -19,6 +19,7 @@ export const nextjsProjects = [
     category: "next.js",
     image: wildOasisImage,
     tech: ["Next.js", "React", "Supabase", "Tailwind"],
+    featured: true,
   },
   {
     id: 218,
@@ -100,14 +101,14 @@ export const nextjsProjects = [
     image: xoGame,
     tech: ["Next.js", "React", "Tailwind"],
   },
-  {
-    id: 29,
-    name: "Advanced Ecommerce App",
-    desc: "A powerful and modern E-commerce application built with a clean and responsive user interface. This app fetches product data dynamically from an external API and offers users a smooth and intuitive shopping experience.",
-    demo: "https://ecommerce-nextjs-orcin-iota.vercel.app/",
-    github: "https://github.com/AhmedElabrass25/SimpleEcommerceApp",
-    category: "nextjs",
-    image: NextjsEcommerce,
-    tech: ["Next.js", "React", "API"],
-  },
+  // {
+  //   id: 29,
+  //   name: "Advanced Ecommerce App",
+  //   desc: "A powerful and modern E-commerce application built with a clean and responsive user interface. This app fetches product data dynamically from an external API and offers users a smooth and intuitive shopping experience.",
+  //   demo: "https://ecommerce-nextjs-orcin-iota.vercel.app/",
+  //   github: "https://github.com/AhmedElabrass25/SimpleEcommerceApp",
+  //   category: "nextjs",
+  //   image: NextjsEcommerce,
+  //   tech: ["Next.js", "React", "API"],
+  // },
 ];

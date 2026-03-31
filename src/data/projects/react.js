@@ -23,6 +23,7 @@ export const reactProjects = [
     category: "reactjs",
     image: quran1,
     tech: ["React", "API", "Audio", "Tailwind"],
+    featured: true,
   },
   {
     id: 1,
@@ -33,6 +34,8 @@ export const reactProjects = [
     category: "react",
     image: refreshEcommerce,
     tech: ["React", "Tailwind", "Vite"],
+    featured: true,
+
   },
   {
     id: 2,
@@ -43,6 +46,8 @@ export const reactProjects = [
     category: "react",
     image: Movieo,
     tech: ["React", "TMDB API", "Tailwind"],
+    featured: true,
+
   },
   {
     id: 32,
@@ -53,8 +58,9 @@ export const reactProjects = [
     category: "reactjs",
     image: restaurant,
     tech: ["React", "Supabase", "Tailwind"],
+    featured: true,
   },
-  {
+  { 
     id: 2223,
     name: "EyeCarePlus: Modern Healthcare Landing Page",
     desc: "EyeCarePlus is a high-performance, responsive landing page designed for a premium eye care clinic. The project focuses on a clean, medical-grade aesthetic combined with smooth interactive elements to build trust and encourage patient conversions.",
@@ -73,17 +79,18 @@ export const reactProjects = [
     category: "reactjs",
     image: KanbanApp,
     tech: ["React", "Beautiful DnD", "Tailwind"],
+        featured: true,
   },
-  {
-    id: 31,
-    name: "LMS App",
-    desc: "EDU_MASTER is a full-featured Learning Management System that allows administrators and students to manage lessons, exams, and results in an interactive way.It provides an intuitive dashboard, real-time validations, and smooth UI interactions using modern web technologies.",
-    demo: "https://coruscating-fudge-d701d9.netlify.app",
-    github: "https://github.com/AhmedElabrass25/EyeCarePlus-Project",
-    category: "reactjs",
-    image: lms,
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-  },
+  // {
+  //   id: 31,
+  //   name: "LMS App",
+  //   desc: "EDU_MASTER is a full-featured Learning Management System that allows administrators and students to manage lessons, exams, and results in an interactive way.It provides an intuitive dashboard, real-time validations, and smooth UI interactions using modern web technologies.",
+  //   demo: "https://coruscating-fudge-d701d9.netlify.app",
+  //   github: "https://github.com/AhmedElabrass25/EyeCarePlus-Project",
+  //   category: "reactjs",
+  //   image: lms,
+  //   tech: ["React", "Node.js", "Express", "MongoDB"],
+  // },
   {
     id: 20,
     name: "Around The World",
@@ -134,16 +141,16 @@ export const reactProjects = [
     image: movieImage,
     tech: ["React", "Context API", "Tailwind"],
   },
-  {
-    id: 19,
-    name: "Linkedin Clone",
-    desc: "The LinkedIn Clone is  fully responsive social networking platform designed to connect professionals. This web application replicates key LinkedIn features, enabling users to sign in securely with Google Authentication, create and share posts, and engage with others.",
-    demo: "https://linkedin-clone-5db25.web.app",
-    github: "https://github.com/AhmedElabrass25/Linkedin-Clone",
-    category: "reactjs",
-    image: linkedinImage,
-    tech: ["React", "Firebase", "Redux"],
-  },
+  // {
+  //   id: 19,
+  //   name: "Linkedin Clone",
+  //   desc: "The LinkedIn Clone is  fully responsive social networking platform designed to connect professionals. This web application replicates key LinkedIn features, enabling users to sign in securely with Google Authentication, create and share posts, and engage with others.",
+  //   demo: "https://linkedin-clone-5db25.web.app",
+  //   github: "https://github.com/AhmedElabrass25/Linkedin-Clone",
+  //   category: "reactjs",
+  //   image: linkedinImage,
+  //   tech: ["React", "Firebase", "Redux"],
+  // },
   {
     id: 21,
     name: "Weather App",
